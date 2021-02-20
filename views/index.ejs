@@ -1,0 +1,43 @@
+      <%- include('partials/header.ejs') %>
+      <div class="text-center h2">
+         Products List
+      </div>
+      <div class="container" style="margin-top: 50px">
+         <% if(products.length>0) { %>
+            <table class="table table-hovered">
+               <thead>
+                  <tr>
+                     <th scope="col">ID</th>
+                     <th scope="col">Image</th>
+                     <th scope="col">Title</th>
+                     <th scope="col">Category</th>
+                     <th scope="col">Quantity</th>
+                     <th scope="col">Price</th>
+                     <th scope="col">Action</th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <% products.forEach( (product, index)=>{ %>
+                     <tr>
+                        <th scope="row"><%= product.productID %></th>
+                        <td><img src="assets/imgs/Products_Pics/<%= product.productID %>.<%= product.image.split('.')[1] %>"
+                                 class="rounded-rectangle" style="width:50px; height:50px;" 
+                                 alt="<%= product.image %>"></td>
+                        <td><%= product.title %></td>
+                        <td><%= product.category %></td>
+                        <td><%= product.quantity %></td>
+                        <td><%= product.price %></td>
+                        <td>
+                           <a href="/edit/<%= product.productID %>" target="_blank" class="btn btn-sm btn-success">Edit</a>
+                           <a href="/delete/<%= product.productID %>" class="btn btn-sm btn-danger">Delete</a>
+                        </td>
+                     </tr>
+                     <% }) %>
+               </tbody>
+            </table>
+         <% } else { %>
+            <p class="text-center"> No Products Found. Click <a href="/add">Here</a> to add Products.</p>
+         <% } %>
+      </div>
+   </body>
+</html>
